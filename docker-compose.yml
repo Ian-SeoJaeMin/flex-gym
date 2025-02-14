@@ -1,0 +1,25 @@
+services:
+  flex-gym-db:
+    image: postgres:17.2-alpine3.21
+    container_name: flex-gym-db
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    restart: always
+  redis:
+    image: redis:7.4.2-alpine
+    container_name: flex-gym-redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis_data:/data
+    restart: always
+
+volumes:
+  postgres_data:
+  redis_data:
