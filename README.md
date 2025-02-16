@@ -13,7 +13,7 @@ flexGym은 크로스핏 및 피트니스 센터에서 회원 및 출석을 효�
 - **CI/CD:** Jenkins 또는 ArgoCD (추후 설정 예정)
 - **컨테이너:** Docker & Docker-Compose
 
-## 📂 프로젝트 구조
+## 📂 프로젝트 구조 (기능 구현중이기 때문에 변경될 수 있음)
 ```
 flexGym/
 ├── src/
