@@ -11,17 +11,6 @@ import { User } from './entities/user.entity';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @Post()
-    @ApiOperation({ summary: '유저 생성' })
-    @ApiResponse({
-        status: 201,
-        description: '유저 생성 성공',
-        type: User
-    })
-    create(@Body() createUserDto: CreateUserDto) {
-        return this.userService.create(createUserDto);
-    }
-
     @Get()
     @ApiOperation({ summary: '유저 목록 조회' })
     @ApiResponse({
@@ -33,7 +22,7 @@ export class UserController {
         return this.userService.findAll();
     }
 
-    @Get(':id')
+    @Get('/profile/:id')
     @ApiOperation({ summary: '유저 조회' })
     @ApiResponse({
         status: 200,
@@ -44,7 +33,18 @@ export class UserController {
         return this.userService.findOne(id);
     }
 
-    @Patch(':id')
+    @Post('/signup')
+    @ApiOperation({ summary: '회원가입' })
+    @ApiResponse({
+        status: 201,
+        description: '회원가입 성공',
+        type: User
+    })
+    create(@Body() createUserDto: CreateUserDto) {
+        return this.userService.create(createUserDto);
+    }
+
+    @Patch('/profile/:id')
     @ApiOperation({ summary: '유저 수정' })
     @ApiResponse({
         status: 200,
