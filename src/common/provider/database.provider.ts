@@ -1,6 +1,6 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { envVariableKeys } from '../consts/env.const';
+import { envVariableKeys } from '../code/consts/env.const';
 
 export const databaseProvider = [
     TypeOrmModule.forRootAsync({
@@ -15,7 +15,7 @@ export const databaseProvider = [
                 username: configService.get<string>(envVariableKeys.dbUsername),
                 password: configService.get<string>(envVariableKeys.dbPassword),
                 database: configService.get<string>(envVariableKeys.dbDatabase),
-                entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+                entities: ['dist/**/*.entity{.ts,.js}'],
                 synchronize: isDevelopment,
                 logging: true
             } as TypeOrmModuleOptions;

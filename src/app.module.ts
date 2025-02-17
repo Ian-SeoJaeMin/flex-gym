@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { databaseProvider } from './common/provider/database.provider';
+import { UserModule } from './user/user.module';
 
 @Module({
     imports: [
@@ -9,7 +10,8 @@ import { databaseProvider } from './common/provider/database.provider';
             isGlobal: true,
             envFilePath: `.env.${process.env.NODE_ENV || 'development'}`
         }),
-        ...databaseProvider
+        ...databaseProvider,
+        UserModule
     ],
     controllers: [AppController],
     providers: []
