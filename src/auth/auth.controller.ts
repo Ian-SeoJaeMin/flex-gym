@@ -18,7 +18,7 @@ export class AuthController {
     @Post('login')
     login(@Authorization() loginDto: LoginDto) {
         // TODO : 로그인 처리
-        return 'login';
-        // return this.authService.login(loginDto);
+        // return 'login';
+        return this.authService.login(loginDto);
     }
 }

@@ -5,7 +5,8 @@ export const envVariableKeys = {
     dbUsername: 'DB_USERNAME',
     dbPassword: 'DB_PASSWORD',
     dbDatabase: 'DB_DATABASE',
-    jwtSecret: 'JWT_SECRET',
+    bcryptSaltRounds: 'BCRYPT_SALT_ROUNDS',
     jwtExpiresIn: 'JWT_EXPIRES_IN',
-    bcryptSaltRounds: 'BCRYPT_SALT_ROUNDS'
+    accessTokenSecret: 'ACCESS_TOKEN_SECRET',
+    refreshTokenSecret: 'REFRESH_TOKEN_SECRET'
 };

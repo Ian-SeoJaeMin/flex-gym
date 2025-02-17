@@ -20,7 +20,7 @@ export class User extends BaseTable {
     @Column()
     phone: string;
 
-    @Column({ type: 'enum', enum: Role, default: Role.ADMIN })
+    @Column({ type: 'enum', enum: Role, default: Role.USER })
     role: Role;
 
     @Column({ nullable: true })
