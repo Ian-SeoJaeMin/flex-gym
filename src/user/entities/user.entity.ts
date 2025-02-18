@@ -1,7 +1,8 @@
 import { Role } from '@src/common/code/enums/role.enum';
 import { BaseTable } from '@src/common/entity/base-table.entity';
+import { Gym } from '@src/gym/entities/gym.entity';
 import { Exclude } from 'class-transformer';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class User extends BaseTable {
@@ -23,9 +24,12 @@ export class User extends BaseTable {
     @Column({ type: 'enum', enum: Role, default: Role.USER })
     role: Role;
 
-    @Column({ nullable: true })
-    centerId: string;
+    // @Column({ nullable: true })
+    // gymId: string;
 
-    // @ManyToOne(() => Center, center => center.users)
-    // center: Center;
+    @Column({ default: true })
+    isActive: boolean;
+
+    @OneToMany(() => Gym, gym => gym.owner)
+    gyms: Gym[];
 }

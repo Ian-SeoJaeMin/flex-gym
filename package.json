@@ -16,11 +16,15 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:user:watch": "jest --testPathPattern=src/user --coverage --collectCoverageFrom=src/user/** --watch",
+    "test:gym:watch": "jest --testPathPattern=src/gym --coverage --collectCoverageFrom=src/gym/** --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:user": "jest --testPathPattern=src/user/.*\\.spec\\.ts$ --verbose",
+    "test:gym": "jest --testPathPattern=src/gym/.*\\.spec\\.ts$ --verbose"
   },
   "dependencies": {
+    "@nestjs/cache-manager": "^3.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^10.0.0",

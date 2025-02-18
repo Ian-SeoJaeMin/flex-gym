@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { TokenService } from './token.service';
 import { TokenProvider } from './token.provider';
 import { UserTokenGeneratorService } from './generator/user-token.generator';
-
+import { JwtStrategy } from './strategy/jwt.strategy';
 @Module({
     imports: [JwtModule.register({})],
     controllers: [],
@@ -17,8 +17,9 @@ import { UserTokenGeneratorService } from './generator/user-token.generator';
                 return [userTokenGenerator];
             },
             inject: [UserTokenGeneratorService]
-        }
+        },
+        JwtStrategy
     ],
-    exports: [TokenService]
+    exports: [TokenService, JwtModule]
 })
 export class TokenModule {}
