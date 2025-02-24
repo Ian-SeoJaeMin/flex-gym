@@ -11,6 +11,7 @@ import { AuthGuard } from './auth/guards/jwt-auth.guard';
 import { BearerTokenMiddleware } from './common/middleware/bearer-token.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
 import { JwtModule } from '@nestjs/jwt';
+import { MemberModule } from './member/member.module';
 
 @Module({
     imports: [
@@ -26,7 +27,8 @@ import { JwtModule } from '@nestjs/jwt';
         ...databaseProvider,
         UserModule,
         AuthModule,
-        GymModule
+        GymModule,
+        MemberModule
     ],
     controllers: [AppController],
     providers: [

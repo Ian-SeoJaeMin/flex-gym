@@ -1,6 +1,7 @@
 import { BaseTable } from '@src/common/entity/base-table.entity';
+import { Member } from '@src/member/entities/member.entity';
 import { User } from '@src/user/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Gym extends BaseTable {
@@ -40,4 +41,7 @@ export class Gym extends BaseTable {
     })
     @JoinColumn()
     owner: User;
+
+    @OneToMany(() => Member, member => member.gym)
+    members: Member[];
 }

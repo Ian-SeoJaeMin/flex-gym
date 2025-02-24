@@ -40,6 +40,7 @@ export class AuthService {
             case Role.USER:
                 const userTokenDto = new UserTokenDto();
                 userTokenDto.userId = id;
+                userTokenDto.role = role;
                 return this.userTokenService.issueToken(userTokenDto, role);
             // case UserType.ADMIN:
             // return this.adminTokenService.issueToken(user);

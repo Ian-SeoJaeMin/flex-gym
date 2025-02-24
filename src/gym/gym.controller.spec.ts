@@ -4,6 +4,7 @@ import { GymService } from './gym.service';
 import { Gym } from './entities/gym.entity';
 import { NotFoundException } from '@nestjs/common';
 import { User } from '@src/user/entities/user.entity';
+import { UserTokenDto } from '@src/token/dto/user-token.dto';
 
 describe('GymController', () => {
     let gymController: GymController;
@@ -49,7 +50,7 @@ describe('GymController', () => {
 
     describe('create', () => {
         it('should create a gym', async () => {
-            const owner = { id: '1', email: 'test@test.com' } as User;
+            const owner = { userId: '1' } as UserTokenDto;
             const createGymDto = {
                 name: '플렉스 짐',
                 postalCode: '06159',
@@ -59,7 +60,7 @@ describe('GymController', () => {
                 openTime: '09:00',
                 closeTime: '22:00'
             };
-            const result = { id: '1', ...createGymDto, owner } as Gym;
+            const result = { id: '1', ...createGymDto } as Gym;
 
             jest.spyOn(gymService, 'create').mockResolvedValue(result);
 
@@ -71,6 +72,7 @@ describe('GymController', () => {
 
     describe('update', () => {
         it('should update a gym', async () => {
+            const owner = { userId: '1' } as UserTokenDto;
             const updateGymDto = {
                 name: '업데이트된 플렉스 짐',
                 openTime: '08:00',
@@ -80,15 +82,21 @@ describe('GymController', () => {
 
             jest.spyOn(gymService, 'update').mockResolvedValue(result);
 
-            const response = await gymController.update('1', updateGymDto);
+            const response = await gymController.update(owner, '1', updateGymDto);
 
             expect(response).toEqual(result);
         });
 
         it('should throw an error if the gym is not found', async () => {
+            const owner = { userId: '1' } as UserTokenDto;
+            const updateGymDto = {
+                name: '업데이트된 플렉스 짐',
+                openTime: '08:00',
+                closeTime: '23:00'
+            };
             jest.spyOn(gymService, 'update').mockRejectedValue(new NotFoundException('존재하지 않는 체육관입니다.'));
 
-            await expect(gymController.update('1', { name: '업데이트된 플렉스 짐' })).rejects.toThrow('존재하지 않는 체육관입니다.');
+            await expect(gymController.update(owner, '1', updateGymDto)).rejects.toThrow('존재하지 않는 체육관입니다.');
         });
     });
 

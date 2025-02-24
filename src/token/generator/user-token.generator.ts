@@ -12,7 +12,6 @@ export class UserTokenGeneratorService implements TokenGenerator<UserTokenDto, P
     constructor(private readonly tokenProvidor: TokenProvider) {}
 
     async issueToken(userTokenDto: UserTokenDto): Promise<TokenResponseDto> {
-        console.log(userTokenDto);
         return {
             accessToken: await this.tokenProvidor.issueToken(TokenType.ACCESS_TOKEN, userTokenDto, jwtConfig.user.accessTokenExpiresIn),
             refreshToken: await this.tokenProvidor.issueToken(TokenType.REFRESH_TOKEN, userTokenDto, jwtConfig.user.refreshTokenExpireIn)
