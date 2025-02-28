@@ -1,7 +1,8 @@
 import { Gender } from '@src/common/code/enums/gender.enum';
 import { BaseTable } from '@src/common/entity/base-table.entity';
 import { Gym } from '@src/gym/entities/gym.entity';
-import { BaseEntity, Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Attend } from '@src/attend/entities/attend.entity';
 
 @Entity()
 export class Member extends BaseTable {
@@ -28,4 +29,7 @@ export class Member extends BaseTable {
 
     @ManyToOne(() => Gym, gym => gym.members)
     gym: Gym;
+
+    @OneToMany(() => Attend, attend => attend.member)
+    attendances: Attend[];
 }

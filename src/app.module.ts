@@ -12,6 +12,7 @@ import { BearerTokenMiddleware } from './common/middleware/bearer-token.middlewa
 import { CacheModule } from '@nestjs/cache-manager';
 import { JwtModule } from '@nestjs/jwt';
 import { MemberModule } from './member/member.module';
+import { AttendModule } from './attend/attend.module';
 
 @Module({
     imports: [
@@ -28,7 +29,8 @@ import { MemberModule } from './member/member.module';
         UserModule,
         AuthModule,
         GymModule,
-        MemberModule
+        MemberModule,
+        AttendModule
     ],
     controllers: [AppController],
     providers: [

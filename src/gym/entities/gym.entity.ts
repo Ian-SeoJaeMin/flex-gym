@@ -1,3 +1,4 @@
+import { Attend } from '@src/attend/entities/attend.entity';
 import { BaseTable } from '@src/common/entity/base-table.entity';
 import { Member } from '@src/member/entities/member.entity';
 import { User } from '@src/user/entities/user.entity';
@@ -44,4 +45,7 @@ export class Gym extends BaseTable {
 
     @OneToMany(() => Member, member => member.gym)
     members: Member[];
+
+    @OneToMany(() => Attend, attend => attend.gym)
+    attendances: Attend[];
 }
