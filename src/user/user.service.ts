@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { envVariableKeys } from '@src/common/code/consts/env.const';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+import { ConflictUserException } from '@src/common/exception/conflict-user.exception';
 
 @Injectable()
 export class UserService {
@@ -65,14 +66,14 @@ export class UserService {
     async checkDuplicateEmail(email: string, excludeId?: string) {
         const existingUser = await this.userRepository.findOneBy({ email, id: excludeId ? Not(excludeId) : undefined });
         if (existingUser) {
-            throw new ConflictException('이미 존재하는 이메일입니다.');
+            throw new ConflictUserException(null, email);
         }
     }
 
     async checkDuplicatePhone(phone: string, excludeId?: string) {
         const existingUser = await this.userRepository.findOneBy({ phone, id: excludeId ? Not(excludeId) : undefined });
         if (existingUser) {
-            throw new ConflictException('이미 존재하는 전화번호입니다.');
+            throw new ConflictUserException(phone, null);
         }
     }
 }
